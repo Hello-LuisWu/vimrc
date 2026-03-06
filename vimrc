@@ -1,5 +1,5 @@
 " vim 全局配置文件路径：/etc/vim/vimrc; /etc/vimrc; /usr/share/vim/vimrc；C:\Program Files\Vim\_vimrc
-" vim 用户配置文件路径：~/.vimrc; ~/.config/vim/vimrc; C:\Users\username\_vimrc
+" vim 用户配置文件路径：~/.vimrc; ~/.vim/vimrc; ~/.config/vim/vimrc; C:\Users\username\_vimrc
 " more color: https://www.ditig.com/publications/256-colors-cheat-sheet
 
 
