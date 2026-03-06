@@ -1,3 +1,8 @@
+" vim 全局配置文件路径：/etc/vim/vimrc; /etc/vimrc; /usr/share/vim/vimrc；C:\Program Files\Vim\_vimrc
+" vim 用户配置文件路径：~/.vimrc; ~/.config/vim/vimrc; C:\Users\username\_vimrc
+" more color: https://www.ditig.com/publications/256-colors-cheat-sheet
+
+
 " ~/.vimrc
 let g:config_dir = expand('~/.config/vim/conf')
 
@@ -30,21 +35,3 @@ unlet s:plugins_file
 unlet s:file
 unlet s:plug_conf_dir
 unlet s:plugin_file
-
-
-
-
-
-" plugins.vim 文件最好优先加载。这配置才能读取主题等插件文件
-" let g:config_dir = expand('~/.config/vim/conf')
-" execute 'set runtimepath^=' . g:config_dir
-" let s:plugins_file = g:config_dir . '/plugins.vim'
-" if filereadable(s:plugins_file)
-"   execute 'source' s:plugins_file
-" endif
-" for s:file in sort(split(glob(g:config_dir . '/*.vim'), '\n'))
-"   if s:file !=# s:plugins_file
-"     execute 'source' s:file
-"   endif
-" endfor
-" unlet s:plugins_file

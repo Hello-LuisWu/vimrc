@@ -6,10 +6,6 @@
 " System   : Darwin 24.3.0
 " ------------------------------------------------------------------------------
 
-" vim 默认配置文件路径：/etc/vim/vimrc; /usr/share/vim/vimrc；C:\Program Files\Vim\_vimrc
-" vim 用户配置文件路径：~/.vimrc; C:\Users\username\_vimrc
-" more color: https://www.ditig.com/publications/256-colors-cheat-sheet
-
 " ========== 基础设置 ==========
 set nocompatible " 禁用 Vi 兼容模式（确保使用 Vim 的全部功能）
 " 字符编码
