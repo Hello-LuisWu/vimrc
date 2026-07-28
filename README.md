@@ -6,6 +6,7 @@
 # Linux/macOS
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.giteeusercontent.com/hello-luiswu/vim-plug/raw/master/plug.vim
+
 # Windows
 iwr -useb https://raw.giteeusercontent.com/hello-luiswu/vim-plug/raw/master/plug.vim |`
     ni $HOME/vimfiles/autoload/plug.vim -Force
