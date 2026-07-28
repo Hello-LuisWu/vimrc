@@ -1,7 +1,5 @@
 # vim-conf
 
-## clone vim file
-
 ## install vim-plug
 
 ```sh
@@ -12,6 +10,8 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 iwr -useb https://raw.giteeusercontent.com/hello-luiswu/vim-plug/raw/master/plug.vim |`
     ni $HOME/vimfiles/autoload/plug.vim -Force
 ```
+
+## clone vim file
 
 ```sh
 # Linux/macOS
