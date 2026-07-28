@@ -1,6 +1,6 @@
 call plug#begin('~/.vim/plugged')
 	Plug 'https://gitee.com/hello-luiswu/nerdcommenter.git'
-	Plug 'https://gitee.com/hello-luiswu/vim-startify.git'
+	" Plug 'https://gitee.com/hello-luiswu/vim-startify.git'
 	Plug 'https://gitee.com/hello-luiswu/nerdtree.git', { 'on': 'NERDTreeToggle' }
 	Plug 'https://gitee.com/hello-luiswu/nerdtree-git-plugin.git'
 	Plug 'https://gitee.com/hello-luiswu/vim-devicons.git'
