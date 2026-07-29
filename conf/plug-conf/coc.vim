@@ -134,7 +134,7 @@ nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
 " 显示当前文件符号大纲
 nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
 " 搜索工作区符号
-nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
+" nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
 " 导航下一个列表项
 nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 " 导航上一个列表项

@@ -27,8 +27,8 @@ let g:tagbar_width = 30               " 侧边栏宽度
 
 nnoremap <c-e> :NERDTreeToggle<CR>
 
-nmap j <Plug>(accelerated_jk_gj)
-nmap k <Plug>(accelerated_jk_gk)
+map j <Plug>(accelerated_jk_gj)
+map k <Plug>(accelerated_jk_gk)
 
 nnoremap s <Plug>(easymotion-prefix)
 
@@ -36,7 +36,7 @@ imap jj <C-[>
 nnoremap U <C-r>
 nnoremap <CR> :set wrap!<CR>
 nnoremap <C-r> :w<CR>:source %<CR>
-" imap \\ <C-[>/<++><CR>:nohlsearch<CR>c4l
+imap \\ <C-[>/<++><CR>:nohlsearch<CR>c4l
 nnoremap <tab> :
 nnoremap ; :
 nnoremap <S-tab> /
@@ -94,12 +94,9 @@ xnoremap > >gv
 xnoremap <S-Tab> <gv
 xnoremap <Tab> >gv
 
-" 复制当前文件路径
-nnoremap <Leader>hp :let @+=expand('%:p')<CR>
-" 复制文件名
-nnoremap <Leader>hn :let @+=expand('%:t')<CR>
-" 切换当前文件所在目录为工作目录
-nnoremap <Leader>hd :cd %:p:h<CR>:pwd<CR>
+nnoremap <Leader>cp :let @+=expand('%:p')<CR>     " 复制当前文件路径
+nnoremap <Leader>cn :let @+=expand('%:t')<CR>     " 复制文件名
+nnoremap <Leader>cd :cd %:p:h<CR>:pwd<CR>         " 切换当前文件所在目录为工作目录
 
 " 查找高亮下一个
 nnoremap * *N
@@ -107,15 +104,15 @@ nnoremap * *N
 nnoremap <Leader>* :let @/='\<'.expand('<cword>').'\>'<CR>:set hls<CR>
 
 " 当前单词替换(仅所在单词)
-nnoremap <Leader>hs :s/\<<C-r><C-w>\>/
+nnoremap <Leader>ss :s/\<<C-r><C-w>\>/
 " 当前单词替换(全局)
-nnoremap <Leader>hS :%s/\<<C-r><C-w>\>//g<Left><Left>
+nnoremap <Leader>sS :%s/\<<C-r><C-w>\>//g<Left><Left>
 " 当前单词替换(所有行的第一个匹配)
-nnoremap <Leader>hl :%s/\<<C-r><C-w>\>/
+nnoremap <Leader>sl :%s/\<<C-r><C-w>\>/
 " 手动输入全局替换(带确认)
-nnoremap <Leader>hi :%s//gc<left><left><left>
+nnoremap <Leader>si :%s//gc<left><left><left>
 " 所选文本替换
-xnoremap <Leader>hh "hy:s/<C-r>h//<Left>
+xnoremap <Leader>s "hy:s/<C-r>h//<Left>
 
 " 用法：:H keyword 即可高亮某个关键字
 command! -nargs=1 H let @/ = <q-args> | set hlsearch
@@ -129,58 +126,40 @@ nnoremap N Nzzzv
 " inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 " inoremap <C-f> <C-n>
 
-" tab 配置
-nnoremap <leader><Tab>l :tabnext<CR>
-nnoremap <leader><Tab>h :tabprevious<CR>
-" nnoremap <leader><Tab> gt
-" nnoremap <leader><S-Tab> gT
-nnoremap <leader><Tab>c :tabclose<CR>
-nnoremap <leader><Tab>o :tabonly<CR>
-
-" buffer配置
-" nnoremap <Tab> :bnext<CR>            " 下一个 buffer
-" nnoremap <S-Tab> :bprevious<CR>      " 上一个 buffer
-nnoremap <Leader>bd :bd<CR>          " 删除当前 buffer
-nnoremap <Leader>ba :bufdo bd<CR>    " 删除所有 buffer
-
-" ==============================
-" 窗口配置
-" ==============================
 nnoremap <silent> <S-left> :vertical resize -2<CR>
 nnoremap <silent> <S-right> :vertical resize +2<CR>
 nnoremap <silent> <S-down> :resize +2<CR>
 nnoremap <silent> <S-up> :resize -2<CR>
-" 关闭窗口
-nnoremap <leader>wc :close<CR>
-" 关闭其他窗口
-nnoremap <leader>wo :only<CR>
-" 垂直分屏
-nnoremap <leader>ws :vsplit<CR>
-" 水平分屏
-nnoremap <leader>wS :split<CR>
-" 新建空白窗口
-nnoremap <leader>wn <C-w>n
-" 窗口等宽
-nnoremap <leader>wd <C-w>=
-" 窗口移动到最左边
-nnoremap <leader>wh <C-w>H
-" 窗口移动到最下边
-nnoremap <leader>wj <C-w>J
-" 窗口移动到最上边
-nnoremap <leader>wk <C-w>K
-" 窗口移动到最右边
-nnoremap <leader>wl <C-w>L
-" 光标焦点左移
-nnoremap <C-h> <C-w>h
-" 光标焦点下移
-nnoremap <C-j> <C-w>j
-" 光标焦点上移
-nnoremap <C-k> <C-w>k
-" 光标焦点右移
-nnoremap <C-l> <C-w>l
 
-" 重命名文件
-nnoremap <leader>wr :Rename<space>
+" tab 配置
+nnoremap <leader><Tab> :tabnext<CR>
+nnoremap <leader><S-Tab> :tabprevious<CR>
+" nnoremap <leader><Tab> gt
+" nnoremap <leader><S-Tab> gT
+nnoremap <leader>tc :tabclose<CR>
+nnoremap <leader>to :tabonly<CR>
+
+" buffer配置
+" nnoremap <Tab> :bnext<CR>            " 下一个 buffer
+" nnoremap <S-Tab> :bprevious<CR>      " 上一个 buffer
+nnoremap <Leader>wd :bd<CR>          " 删除当前 buffer
+nnoremap <Leader>wa :bufdo bd<CR>    " 删除所有 buffer
+
+" 窗口配置
+nnoremap <leader>wc :close<CR>    " 关闭窗口
+nnoremap <leader>wo :only<CR>     " 关闭其他窗口
+nnoremap <leader>ws :vsplit<CR>   " 垂直分屏
+nnoremap <leader>wS :split<CR>    " 水平分屏
+nnoremap <leader>wn <C-w>n        " 新建空白窗口
+nnoremap <leader>wd <C-w>=        " 窗口等宽
+nnoremap <leader>wh <C-w>H        " 窗口移动到最左边
+nnoremap <leader>wj <C-w>J        " 窗口移动到最下边
+nnoremap <leader>wk <C-w>K        " 窗口移动到最上边
+nnoremap <leader>wl <C-w>L        " 窗口移动到最右边
+nnoremap <C-h> <C-w>h             " 光标焦点左移
+nnoremap <C-j> <C-w>j             " 光标焦点下移
+nnoremap <C-k> <C-w>k             " 光标焦点上移
+nnoremap <C-l> <C-w>l             " 光标焦点右移
 
 command! -nargs=1 Rename call s:RenameFile(<f-args>)
 function! s:RenameFile(newname)
@@ -194,6 +173,8 @@ function! s:RenameFile(newname)
 	endif
 endfunction
 
+" 重命名文件
+nnoremap <leader>wr :Rename<space>
 
 " nnoremap ,a mpgUiW"pciW<C-R>=substitute(@p,'-','_','ge')<CR><ESC>`p:delm p<cr>
 " inoremap ,a <ESC>mpgUiW"pciW<C-R>=substitute(@p,'-','_','ge')<CR><ESC>`p:delm p<CR>a
@@ -216,7 +197,6 @@ autocmd Filetype markdown inoremap !! #<Space>
 autocmd Filetype markdown inoremap @@ ##<Space>
 autocmd Filetype markdown inoremap ## ###<Space>
 autocmd Filetype markdown inoremap $$ ####<Space>
-autocmd Filetype markdown imap \\ <C-[>/<++><CR>:nohlsearch<CR>c4l
 
 " Vim 里用这个（打开新窗口运行 shell）
 nnoremap <silent> <C-t> :terminal<CR>
