@@ -30,13 +30,10 @@ nnoremap <c-e> :NERDTreeToggle<CR>
 nmap j <Plug>(accelerated_jk_gj)
 nmap k <Plug>(accelerated_jk_gk)
 
-nnoremap s <Plug>(easymotion-prefix)
-
 imap jj <C-[>
 nnoremap U <C-r>
 nnoremap <CR> :set wrap!<CR>
 nnoremap <C-r> :w<CR>:source %<CR>
-" imap \\ <C-[>/<++><CR>:nohlsearch<CR>c4l
 nnoremap <tab> :
 nnoremap ; :
 nnoremap <S-tab> /
@@ -95,11 +92,11 @@ xnoremap <S-Tab> <gv
 xnoremap <Tab> >gv
 
 " 复制当前文件路径
-nnoremap <Leader>hp :let @+=expand('%:p')<CR>
+nnoremap <Leader>dp :let @+=expand('%:p')<CR>
 " 复制文件名
-nnoremap <Leader>hn :let @+=expand('%:t')<CR>
+nnoremap <Leader>dn :let @+=expand('%:t')<CR>
 " 切换当前文件所在目录为工作目录
-nnoremap <Leader>hd :cd %:p:h<CR>:pwd<CR>
+nnoremap <Leader>dd :cd %:p:h<CR>:pwd<CR>
 
 " 查找高亮下一个
 nnoremap * *N
@@ -124,11 +121,6 @@ command! -nargs=1 H let @/ = <q-args> | set hlsearch
 nnoremap n nzzzv
 nnoremap N Nzzzv
 
-" 补全菜单中使用 Tab/Shift-Tab 进行上下移动
-" inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-" inoremap <C-f> <C-n>
-
 " tab 配置
 nnoremap <leader><Tab>l :tabnext<CR>
 nnoremap <leader><Tab>h :tabprevious<CR>
@@ -140,8 +132,10 @@ nnoremap <leader><Tab>o :tabonly<CR>
 " buffer配置
 " nnoremap <Tab> :bnext<CR>            " 下一个 buffer
 " nnoremap <S-Tab> :bprevious<CR>      " 上一个 buffer
-nnoremap <Leader>bd :bd<CR>          " 删除当前 buffer
-nnoremap <Leader>ba :bufdo bd<CR>    " 删除所有 buffer
+" 删除当前 buffer
+nnoremap <Leader>bd :bd<CR>
+" 删除所有 buffer
+nnoremap <Leader>ba :bufdo bd<CR>
 
 " ==============================
 " 窗口配置
@@ -179,22 +173,6 @@ nnoremap <C-k> <C-w>k
 " 光标焦点右移
 nnoremap <C-l> <C-w>l
 
-" 重命名文件
-nnoremap <leader>wr :Rename<space>
-
-command! -nargs=1 Rename call s:RenameFile(<f-args>)
-function! s:RenameFile(newname)
-	let old = expand('%')
-	if filereadable(old)
-		call rename(old, a:newname)
-		exec 'edit ' . a:newname
-		call delete(old)
-	else
-		echoerr "当前缓冲区文件不存在或不可重命名"
-	endif
-endfunction
-
-
 " nnoremap ,a mpgUiW"pciW<C-R>=substitute(@p,'-','_','ge')<CR><ESC>`p:delm p<cr>
 " inoremap ,a <ESC>mpgUiW"pciW<C-R>=substitute(@p,'-','_','ge')<CR><ESC>`p:delm p<CR>a
 
@@ -210,13 +188,12 @@ autocmd Filetype markdown inoremap ` `` <++><Esc>F`i
 autocmd Filetype markdown inoremap ``` `````` <++><Esc>3F`i
 autocmd Filetype markdown inoremap <leader>` ```<Enter>```<Enter><++><Esc>2kA
 autocmd Filetype markdown inoremap ~~ ~~~<Enter><Enter>~~~<Enter><++><Esc>2kA
-autocmd Filetype markdown inoremap <leader>pp ![](<++>) <++><Esc>F[a
-autocmd Filetype markdown inoremap <leader>aa [](<++>) <++><Esc>F[a
-autocmd Filetype markdown inoremap !! #<Space>
 autocmd Filetype markdown inoremap @@ ##<Space>
 autocmd Filetype markdown inoremap ## ###<Space>
 autocmd Filetype markdown inoremap $$ ####<Space>
-autocmd Filetype markdown imap \\ <C-[>/<++><CR>:nohlsearch<CR>c4l
+autocmd Filetype markdown inoremap \\ <C-[>/<++><CR>:nohlsearch<CR>c4l
+autocmd Filetype markdown inoremap PP ![](<++>) <++><Esc>F[a
+autocmd Filetype markdown inoremap AA [](<++>) <++><Esc>F[a
 
 " Vim 里用这个（打开新窗口运行 shell）
 nnoremap <silent> <C-t> :terminal<CR>
