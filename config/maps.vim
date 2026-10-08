@@ -1,52 +1,55 @@
-" ------------------------------------------------------------------------------
-" Author   : Luis Wu
-" Editor   : VIM
-" Date     : 2025-08-30 21:30
-" Position : /Users/luis/.config/vimrc/maps.vim
-" System   : Darwin 24.3.0
-" ------------------------------------------------------------------------------
-" 基础 以空格键为先导键
+" ===========================
+" 未定义映射
+" ============================
+"
+" nnoremap <C-BS>
+
+" 以空格键为先导键
 let mapleader = " "
+let maplocalleader = " "
 
+" inoremap <C-n> <left>
+" inoremap <C-j> <down>
+" inoremap <C-k> <up>
+" inoremap <C-l> <right>
 
-map <silent> <C-\> :Commentary<CR>
-
-" fzf 模糊搜索
-" 搜索文件
-nnoremap <Leader>ff :Files<CR>
-" 搜索缓冲区
-nnoremap <Leader>fb :Buffers<CR>
-" 全局内容搜索
-nnoremap <Leader>fg :Rg<CR>
-" 历史文件
-nnoremap <Leader>fo :History<CR>
-
-" Tagbar 代码结构
-nnoremap <Leader>T :TagbarToggle<CR>
-let g:tagbar_width = 30               " 侧边栏宽度
-
-nnoremap <c-e> :NERDTreeToggle<CR>
-
-nmap j <Plug>(accelerated_jk_gj)
-nmap k <Plug>(accelerated_jk_gk)
-
-imap jj <C-[>
+noremap! jj <C-[>
 nnoremap U <C-r>
-nnoremap <CR> :set wrap!<CR>
-nnoremap <C-r> :w<CR>:source %<CR>
+nnoremap <leader><CR> :set wrap!<CR>
+nnoremap <silent> <C-r> :w<CR>:source $MYVIMRC<CR>
+" nnoremap <C-r> :w<CR>:source %<CR>
 nnoremap <tab> :
 nnoremap ; :
 nnoremap <S-tab> /
-" nnoremap \ /
+
+" Visual 粘贴不覆盖寄存器
+vnoremap p "_dP
 nnoremap <silent> <BS> :set hls!<CR>
 nnoremap gF  gg=G
+inoremap <C-j> <C-[>o
+inoremap <C-k> <C-[>O
 
-inoremap HH <C-[>I
-inoremap LL <C-[>A
+" 删除当前行，不影响寄存器
+nnoremap <S-BS> "_dd
+
+" Visual 删除，不影响寄存器
+vnoremap <S-BS> "_d
+
+" Vim 里用这个（打开新窗口运行 shell）
+nnoremap <silent> <C-t> :terminal<CR>
+
+" ========================
+" 文件浏览器
+" ========================
+" nnoremap <leader>e :Explore<CR>
+" 垂直
+nnoremap <leader>e :Vexplore<CR>
+" 水平
+" nnoremap <leader>eh :Hexplore<CR>
 
 " 再制
-inoremap <C-d> <C-[>yypA
-nnoremap <C-d> yyp
+" inoremap <C-d> <C-[>yypA
+" nnoremap <C-d> yyp
 
 for mode in ['n', 'x']
 	execute mode . 'noremap q: <Nop>'
@@ -56,7 +59,6 @@ for mode in ['n', 'x']
 	execute mode . 'noremap W 5w'
 	execute mode . 'noremap B 5b'
 endfor
-
 
 for mode in ['n', 'x']
 	execute mode . 'noremap H 0'
@@ -73,10 +75,14 @@ endfor
 " inoremap ' ''<C-[>i
 " inoremap " ""<C-[>i
 " inoremap < <><C-[>i
+
+" nnoremap <A-j> :move .+1<CR>
+" nnoremap <A-k> :move .-2<CR>
+" nnoremap <A-j> :m .+1<CR>==
+" nnoremap <A-k> :m .-2<CR>==
+
 xnoremap <C-j> :m '>+1<CR>gv=gv
 xnoremap <C-k> :m '<-2<CR>gv=gv
-inoremap <C-j> <C-[>o
-inoremap <C-k> <C-[>O
 
 for mode in ['n', 'x', 'i']
 	execute mode . 'noremap <left> <Nop>'
@@ -92,57 +98,91 @@ xnoremap <S-Tab> <gv
 xnoremap <Tab> >gv
 
 " 复制当前文件路径
-nnoremap <Leader>hp :let @+=expand('%:p')<CR>
+nnoremap <Leader>dp :let @+=expand('%:p')<CR>
 " 复制文件名
-nnoremap <Leader>hn :let @+=expand('%:t')<CR>
+nnoremap <Leader>dn :let @+=expand('%:t')<CR>
 " 切换当前文件所在目录为工作目录
-nnoremap <Leader>hd :cd %:p:h<CR>:pwd<CR>
+nnoremap <Leader>dd :cd %:p:h<CR>:pwd<CR>
 
 " 查找高亮下一个
 nnoremap * *N
-" 高亮当前单词（不跳转）
-nnoremap <Leader>* :let @/='\<'.expand('<cword>').'\>'<CR>:set hls<CR>
-
-" 当前单词替换(仅所在单词)
-nnoremap <Leader>hs :s/\<<C-r><C-w>\>/
-" 当前单词替换(全局)
-nnoremap <Leader>hS :%s/\<<C-r><C-w>\>//g<Left><Left>
-" 当前单词替换(所有行的第一个匹配)
-nnoremap <Leader>hl :%s/\<<C-r><C-w>\>/
-" 手动输入全局替换(带确认)
-nnoremap <Leader>hi :%s//gc<left><left><left>
-" 所选文本替换
-xnoremap <Leader>hh "hy:s/<C-r>h//<Left>
-
-" 用法：:H keyword 即可高亮某个关键字
-command! -nargs=1 H let @/ = <q-args> | set hlsearch
 
 " 搜索后保持居中
 nnoremap n nzzzv
 nnoremap N Nzzzv
+nnoremap <C-d> <C-d>zz
+nnoremap <C-u> <C-u>zz
+nnoremap <C-f> <C-f>zz
+nnoremap <C-b> <C-b>zz
 
-" 补全菜单中使用 Tab/Shift-Tab 进行上下移动
-" inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-" inoremap <C-f> <C-n>
-
+" ==========================
 " tab 配置
-nnoremap <leader><Tab>l :tabnext<CR>
-nnoremap <leader><Tab>h :tabprevious<CR>
-" nnoremap <leader><Tab> gt
-" nnoremap <leader><S-Tab> gT
-nnoremap <leader><Tab>c :tabclose<CR>
-nnoremap <leader><Tab>o :tabonly<CR>
+" ==========================
+nnoremap \ :tabnext<CR>
+nnoremap <Bar> :tabprevious<CR>
+nnoremap tn :tabnew<CR>
+nnoremap tc :tabclose<CR>
+nnoremap to :tabonly<CR>
+nnoremap tt :tabmove +1<CR>
+nnoremap TT :tabmove -1<CR>
+nnoremap th :tabfirst<CR>
+nnoremap tl :tablast<CR>
 
-" buffer配置
-" nnoremap <Tab> :bnext<CR>            " 下一个 buffer
-" nnoremap <S-Tab> :bprevious<CR>      " 上一个 buffer
-nnoremap <Leader>bd :bd<CR>          " 删除当前 buffer
-nnoremap <Leader>ba :bufdo bd<CR>    " 删除所有 buffer
+
+" 数字键直接跳转到第 n 个标签
+nnoremap <leader>1 1gt
+nnoremap <leader>2 2gt
+nnoremap <leader>3 3gt
+nnoremap <leader>4 4gt
+nnoremap <leader>5 5gt
+nnoremap <leader>6 6gt
+nnoremap <leader>7 7gt
+nnoremap <leader>8 8gt
+nnoremap <leader>9 9gt
+
+nnoremap <leader>m1 :tabmove 0<CR>
+nnoremap <leader>m2 :tabmove 1<CR>
+nnoremap <leader>m3 :tabmove 2<CR>
+nnoremap <leader>m4 :tabmove 3<CR>
+nnoremap <leader>m5 :tabmove 4<CR>
+nnoremap <leader>m6 :tabmove 5<CR>
+nnoremap <leader>m7 :tabmove 6<CR>
+nnoremap <leader>m8 :tabmove 7<CR>
+nnoremap <leader>m9 :tabmove 8<CR>
+
+" ======================================
+" buffer
+" ======================================
+
+" Buffer 切换
+"--------------------------
+" 下一个 buffer
+nnoremap <leader>bn :bnext<CR>
+" 上一个 buffer
+nnoremap <leader>bp :bprevious<CR>
+" 第一个 buffer
+nnoremap <leader>bf :bfirst<CR>
+" 最后一个 buffer
+nnoremap <leader>bl :blast<CR>
+
+" Buffer 删除
+"--------------------------
+" 删除当前 Buffer
+nnoremap <leader>bd :bdelete<CR>
+" 完全删除当前 Buffer
+nnoremap <leader>bw :bwipeout<CR>
+
+" 强制删除 Buffer
+"--------------------------
+" 强制删除当前 Buffer
+nnoremap <leader>bD :bdelete!<CR>
+" 强制完全删除当前 Buffer
+nnoremap <leader>bW :bwipeout!<CR>
 
 " ==============================
 " 窗口配置
 " ==============================
+" 调整窗口大小
 nnoremap <silent> <S-left> :vertical resize -2<CR>
 nnoremap <silent> <S-right> :vertical resize +2<CR>
 nnoremap <silent> <S-down> :resize +2<CR>
@@ -176,21 +216,30 @@ nnoremap <C-k> <C-w>k
 " 光标焦点右移
 nnoremap <C-l> <C-w>l
 
-" 重命名文件
-nnoremap <leader>wr :Rename<space>
+" 显示文件格式、缩进、编码、文件类型
+" nnoremap <silent> <Bar> :call ShowFileInfo()<CR>
+function! ShowFileInfo() abort
+    " 1. 文件格式
+    let fileformat = &fileformat
 
-command! -nargs=1 Rename call s:RenameFile(<f-args>)
-function! s:RenameFile(newname)
-	let old = expand('%')
-	if filereadable(old)
-		call rename(old, a:newname)
-		exec 'edit ' . a:newname
-		call delete(old)
-	else
-		echoerr "当前缓冲区文件不存在或不可重命名"
-	endif
+    " 2. 缩进宽度
+    let sw = &shiftwidth
+    if sw == 0
+        let sw = &tabstop
+    endif
+
+    " 3. 文件编码
+    let encode = &fileencoding
+    if encode ==# ''
+        let encode = &encoding
+    endif
+
+    " 4. 文件类型
+    let ft = &filetype
+
+    " 5. 拼接并显示
+    echo printf(' %s >%d %s %s', fileformat, sw, encode, ft)
 endfunction
-
 
 " nnoremap ,a mpgUiW"pciW<C-R>=substitute(@p,'-','_','ge')<CR><ESC>`p:delm p<cr>
 " inoremap ,a <ESC>mpgUiW"pciW<C-R>=substitute(@p,'-','_','ge')<CR><ESC>`p:delm p<CR>a
@@ -207,15 +256,9 @@ autocmd Filetype markdown inoremap ` `` <++><Esc>F`i
 autocmd Filetype markdown inoremap ``` `````` <++><Esc>3F`i
 autocmd Filetype markdown inoremap <leader>` ```<Enter>```<Enter><++><Esc>2kA
 autocmd Filetype markdown inoremap ~~ ~~~<Enter><Enter>~~~<Enter><++><Esc>2kA
-autocmd Filetype markdown inoremap <leader>pp ![](<++>) <++><Esc>F[a
-autocmd Filetype markdown inoremap <leader>aa [](<++>) <++><Esc>F[a
-autocmd Filetype markdown inoremap !! #<Space>
 autocmd Filetype markdown inoremap @@ ##<Space>
 autocmd Filetype markdown inoremap ## ###<Space>
 autocmd Filetype markdown inoremap $$ ####<Space>
 autocmd Filetype markdown inoremap \\ <C-[>/<++><CR>:nohlsearch<CR>c4l
 autocmd Filetype markdown inoremap PP ![](<++>) <++><Esc>F[a
 autocmd Filetype markdown inoremap AA [](<++>) <++><Esc>F[a
-
-" Vim 里用这个（打开新窗口运行 shell）
-nnoremap <silent> <C-t> :terminal<CR>

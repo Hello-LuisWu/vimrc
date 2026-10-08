@@ -61,3 +61,5 @@ function! UpdateSignatureDate()
 endfunction
 nnoremap <leader>iu :call UpdateSignatureDate()<CR>
 nnoremap <leader>ii ggO<C-[>:call InsertSignatureSmart()<CR>
+map <silent> <C-\> :Commentary<CR>
+

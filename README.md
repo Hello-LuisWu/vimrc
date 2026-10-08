@@ -27,3 +27,42 @@ git clone --depth 1 https://github.com/Hello-LuisWu/vimrc.git "$env:USERPROFILE\
 ```
 vim +PlugInstall
 ```
+
+## Use the plugin free version
+
+After cloning the files, if you need to use the vim configuration without plugins, please execute the following command:
+
+```
+mv ~/.config/vim/vimrc{,.bak} && mv ~/.config/vim/vim-noplug.vim ~/.config/vim/vimrc
+```
+
+## File tree
+
+```
+.
+├── autoload
+│   └── plug.vim
+├── config
+│   ├── autocmd.vim
+│   ├── highlight.vim
+│   ├── maps.vim
+│   ├── option.vim
+│   ├── plugin-config
+│   │   ├── accelerated-jk.vim
+│   │   ├── bullets.vim
+│   │   ├── coc.vim
+│   │   ├── commentstring.vim
+│   │   ├── fzf.vim
+│   │   ├── lightline.vim
+│   │   ├── motion.vim
+│   │   ├── nerdtree.vim
+│   │   ├── plug-config.vim
+│   │   ├── tagbar.vim
+│   │   └── which-key.vim
+│   ├── plugins.vim
+│   ├── start.vim
+│   └── statusline.vim
+├── README.md
+├── vim-noplug.vim
+└── vimrc
+```

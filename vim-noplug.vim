@@ -1,3 +1,6 @@
+" =====================================
+" Options
+" =====================================
 " ========== 基础设置 ==========
 " 禁用 Vi 兼容模式，使用 Vim 的完整功能
 set nocompatible
@@ -84,9 +87,9 @@ set undoreload=10000
 " ========== 显示与界面 ==========
 
 " 使用 24-bit 真色彩模式
-if has('termguicolors')
-  set termguicolors
-endif
+" if has('termguicolors')
+"   set termguicolors
+" endif
 
 " 始终显示符号列，避免诊断、断点等符号出现时导致文本区域左右跳动
 set signcolumn=yes
@@ -132,7 +135,7 @@ set number
 set relativenumber
 
 " 显示光标所在位置的行号和列号
-" set ruler
+set noruler
 
 " 不在单词内部换行
 set linebreak
@@ -164,7 +167,7 @@ set cursorline
 " 执行可能失败的操作时，显示确认提示,如：未保存退出或只读文件的时候，弹出确认
 set confirm
 
-" 不在状态栏显示当前模式
+" 在状态栏显示当前模式
 set noshowmode
 
 " 显示正在输入的命令
@@ -187,19 +190,66 @@ set virtualedit=
 	\block,
 	\onemore
 
-" 显示状态行:
-" 0	从不显示状态栏
-" 1	只有多个窗口时显示
-" 2	始终显示一个状态栏
-" 3	使用全局状态栏
-set laststatus=2
-
 "标签页
 " 2 总是显示标签页，0 不显示，1 出现多个标签页才显示
-set showtabline=2
+set showtabline=1
 
 " 最多可以打开15个标签页，默认10
-set tabpagemax=15
+set tabpagemax=10
+
+" Tabline 内容
+set tabline=%!MyTabLine()
+
+function! MyTabLine() abort
+    let s = ''
+
+    " 遍历所有 Tab
+    for i in range(1, tabpagenr('$'))
+
+        " 当前 Tab
+        if i == tabpagenr()
+            let s .= '%#TabLineSel#'
+        else
+            let s .= '%#TabLine#'
+        endif
+
+        " Tab 编号
+        let s .= ' ' . i . ':'
+
+        " 获取当前 Tab 的当前窗口
+        let l:buf = tabpagebuflist(i)[tabpagewinnr(i) - 1]
+
+        " 获取文件名，不显示路径
+        let l:name = bufname(l:buf)
+
+        " 无名称 Buffer
+        if empty(l:name)
+            let l:name = '[No Name]'
+        else
+            let l:name = fnamemodify(l:name, ':t')
+        endif
+
+        " 文件名
+        let s .= l:name . ' '
+
+		        " =====================================================
+        if getbufvar(l:buf, '&modified')
+            let s .= '+'
+        endif
+
+        let s .= ' '
+
+        " Tab 之间添加间隔符
+        if i < tabpagenr('$')
+            let s .= '%#TabLineFill#|'
+        endif
+    endfor
+
+    " 右侧空白区域
+    let s .= '%#TabLineFill#%T'
+
+    return s
+endfunction
 
 " \eol:        回车
 " \tab:        Tab
@@ -234,7 +284,7 @@ set fillchars=
 	\fold:·,
 	\foldopen:,
 	\foldclose:,
-	\foldsep:│,
+	\foldsep:\|,
 	\lastline:@
 
 " 启用命令行补全菜单(默认)
@@ -505,6 +555,9 @@ set showmatch
 " 5 = 0.5 秒
 set matchtime=5
 
+" 关闭左边栏
+set signcolumn=no
+
 " ========== 性能优化 ==========
 " 重绘屏幕时暂时不更新显示，提高执行宏、脚本等操作时的性能
 set lazyredraw
@@ -519,3 +572,8 @@ set timeoutlen=300
 " 设置触发 CursorHold 等事件的等待时间为 300 毫秒
 " 也会影响部分插件的响应速度
 set updatetime=300
+
+" =====================================
+" keymaps
+" =====================================
+

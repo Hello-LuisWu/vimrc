@@ -54,6 +54,7 @@ highlight TabLineSel cterm=bold ctermbg=236 ctermfg=168 guibg=#202020 guifg=blue
 highlight TabLineFill cterm=bold ctermbg=236 guibg=#303030
 " 命令模式下  tab建选中样式
 highlight WildMenu cterm=bold ctermbg=black ctermfg=255 guibg=#5f87ff guifg=#eeeeee
+
 " 命令行中的错误消息样式
 highlight ErrorMsg cterm=bold ctermbg=202 ctermfg=235 guibg=#ff5f00 guifg=#eeeeee
 ":set all"， ":autocmd"等的输出标题, startify 插件小牛和文字样式

@@ -5,6 +5,16 @@
 " Position : /Users/luis/.config/vimrc/autocmd.vim
 " System   : Darwin 24.3.0
 " ------------------------------------------------------------------------------
+
+" 仅在聚焦窗口,且不是插入模式时才开启 CursorLine
+augroup CursorLine
+    autocmd!
+    autocmd InsertLeave * setlocal cursorline
+    autocmd InsertEnter * setlocal nocursorline
+    autocmd WinEnter * setlocal cursorline
+    autocmd WinLeave * setlocal nocursorline
+augroup END
+
 " 大文件处理（禁用插件和高耗能功能）
 augroup LargeFile
   autocmd!
@@ -19,21 +29,23 @@ augroup END
 " Python 专用配置
 augroup PythonSettings
   autocmd!
-  autocmd FileType python setlocal shiftwidth=4 tabstop=4
-  autocmd FileType python nnoremap <buffer> <Leader>r :!python %<CR>
+  autocmd FileType python setlocal shiftwidth=4 tabstop=4 expandtab
+  autocmd FileType python nnoremap <buffer> <Leader>r :w<CR>:!python %<CR>
 augroup END
 
 " Markdown 配置（如实时预览）
 augroup MarkdownSettings
-  autocmd FileType markdown setlocal wrap linebreak
-  autocmd FileType markdown nnoremap <buffer> <Leader>p :!glow %<CR>  " 需要安装 Glow
+  autocmd FileType markdown setlocal nowrap linebreak
 augroup END
 
 " 自动恢复上次光标位置
-autocmd BufReadPost *
-\ if line("'\"") > 0 && line("'\"") <= line("$") |
-\   exe "normal! g`\"" |
-\ endif
+augroup RestoreCursor
+	autocmd!
+	autocmd BufReadPost *
+		\ if line("'\"") > 0 && line("'\"") <= line("$") |
+		\     execute "normal! g`\"" |
+		\ endif
+augroup END
 
 autocmd InsertEnter,InsertLeave * setlocal number relativenumber!
 " autocmd InsertEnter * setlocal norelativenumber number
@@ -41,6 +53,15 @@ autocmd InsertEnter,InsertLeave * setlocal number relativenumber!
 
 " . 保存时自动删除行尾空格
 autocmd BufWritePre * %s/\s\+$//e
+
+"  监听文件是否被外部程序修改
+augroup FileChanged
+	autocmd!
+	autocmd FileChangedShellPost *
+		\ echohl WarningMsg |
+		\ echomsg "文件已被外部程序修改" |
+		\ echohl None
+augroup END
 
 " . 禁止自动注释新行
 autocmd FileType * setlocal formatoptions-=cro
@@ -82,4 +103,3 @@ augroup END
 
 " 设置JSON 文件高亮
 autocmd BufRead,BufNewFile *.json set filetype=json
-

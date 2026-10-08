@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =2
+let g:netrw_dirhist_2='/Users'
+let g:netrw_dirhist_1='/Users/luis'
+let g:netrw_dirhist_0='/Users/luis/.config'
+let g:netrw_dirhist_9='/Users/luis/.config/vim'
+let g:netrw_dirhist_8='/Users/luis/.config/vim/config'
+let g:netrw_dirhist_7='/Users/luis'
+let g:netrw_dirhist_6='/Users/luis/.config'
+let g:netrw_dirhist_5='/Users/luis/.config/vim'
+let g:netrw_dirhist_4='/Users/luis/.config/vim/config'
+let g:netrw_dirhist_3='/Users/luis/.config'
