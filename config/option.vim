@@ -189,7 +189,7 @@ set virtualedit=
 
 "标签页
 " 2 总是显示标签页，0 不显示，1 出现多个标签页才显示
-set showtabline=1
+set showtabline=2
 
 " 最多可以打开15个标签页，默认10
 set tabpagemax=10
